@@ -1,7 +1,57 @@
 <html>
 <head>
 <title>UPC</title>
+<script>
+
+function onChange() {
+    var element = document.getElementById("cid");
+    var estatus = document.getElementById("status");
+    var candidate = element.value;
+    var candidates = candidate.split("");
+    var digits = true;
+    var sum = 0;
+
+    for (let i = 0; i < candidates.length; i++) {
+	var digit = candidates[i];
+        if (digit < '0' || digit > '9') {
+	    digits = false;
+	    break;
+	}
+	else {
+	    var n = parseInt(digit);
+	    sum += n * ((i & 1) ? 1 : 3);
+	}
+    }
+    element.style.backgroundColor = digits ? "#FFFFFF" : "#FF8888";
+    if (digits) {
+        var dlen = candidate.length;
+        var m = sum % 10;
+        if (dlen === 11) {
+	    m = m == 0 ? 0 : 10 - m;
+	    estatus.innerHTML = m;
+        }
+        else if (dlen === 12) {
+	    estatus.innerHTML = m === 0 ? "OK" : "BAD";
+	}
+        else {
+	    estatus.innerHTML = "";
+	}
+    }
+    else {
+	estatus.innerHTML = "";
+    }
+
+}
+</script>
 </head>
 <body>
-UPC
+<h1>UPC Generator/Validator</h1>
+<p><b>Enter UPC</b></p>
+<div>
+<input type="text" size="12" maxlength="12" id="cid" onchange="onChange()">
+<span id="status"></span>
+<p>
+<button type="button" onclick="onChange()">Go!</button>
+</p>
+</div>
 </body>
