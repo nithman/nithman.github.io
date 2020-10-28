@@ -51,11 +51,12 @@ function onChange() {
 </script>
 </head>
 <body>
-<h1>UPC Generator/Validator</h1>
+<h1>UPC Validator</h1>
 <p><b>Enter UPC</b></p>
-<div>
-<input type="text" size="12" maxlength="12" id="cid" onchange="onChange()">
-<span id="status"></span>
+<p>
+<input type="text" size="10" maxlength="12" id="cid" onchange="onChange()">
+<b><span id="status"></span></b>
+</p>
 <p>
 <button type="button" onclick="onChange()">Go!</button>
 </p>
